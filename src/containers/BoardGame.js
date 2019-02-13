@@ -24,7 +24,7 @@ class BoardGame extends Component {
         const { dispatch } = this.props;
         const { size } = this.state;
 
-        if (_.isFinite(Number(size))) {
+        if (_.isFinite(Number(size)) && Number(size) > 0) {
             dispatch(actions.board.setBoardSize(Number(size)));
             dispatch(actions.board.putRandomPiecesOnBoard());
         }
@@ -32,18 +32,25 @@ class BoardGame extends Component {
 
     help(e) {
         e.preventDefault();
+        const { dispatch } = this.props;
         const { board, destination } = this.props.board;
         const goal = new BoardModel(board.size);
         goal.setPiece('KNIGHT', destination.x, destination.y);
 
-        const result = BFS(board, goal, item => {
+        const path = BFS(board, goal, item => {
             return item.getSuccessors();
         }, (item1, item2) => {
             return item1.isEqual(item2);
         });
-        console.log(result);
-        if (!result) {
+        console.log(path);
+        if (!path) {
             alert('Unable to find solution...');
+        } else {
+            path.forEach((board, i) => {
+                setTimeout(() => {
+                    dispatch(actions.board.setBoardState(board));
+                }, 1000 * i);
+            });
         }
     }
 

@@ -10,7 +10,8 @@ const initState = {
 };
 const {
     SET_BOARD_SIZE,
-    PUT_RANDOM_PIECES_ON_BOARD
+    PUT_RANDOM_PIECES_ON_BOARD,
+    SET_BOARD_STATE
 } = actions.board;
 
 export default (state = initState, action) => {
@@ -27,14 +28,21 @@ export default (state = initState, action) => {
         const size = board.size;
         const destination = generateRandomPosition(size);
         const knight = generateRandomPosition(size, [destination]);
-        // const destination = {x: 11, y: 11};
-        // const knight = {x: 13, y: 10};
+        // const destination = {x: 5, y: 17};
+        // const knight = {x: 2, y: 16};
 
         board.setPiece('KNIGHT', knight.x, knight.y);
 
         return Object.assign({}, state, {
             board,
             destination
+        });
+    }
+
+    if (action.type === SET_BOARD_STATE) {
+        return Object.assign({}, state, {
+            board: action.payload,
+            size: action.payload.size
         });
     }
 
