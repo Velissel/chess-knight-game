@@ -23,6 +23,7 @@ class BoardGame extends Component {
 
         if (_.isFinite(Number(size))) {
             dispatch(actions.board.setBoardSize(Number(size)));
+            dispatch(actions.board.putRandomPiecesOnBoard());
         }
     }
 

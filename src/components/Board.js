@@ -14,7 +14,8 @@ export default class Board extends Component {
     renderBoard(board) {
         return _.fill(Array(board.size), 'ROW').map((row, rowIndex) => {
             const cells = _.fill(Array(board.size), 'CELL').map((cell, cellIndex) => {
-                return <td key={`cell-${cellIndex}`}></td>;
+                const piece = board.getPiece(rowIndex, cellIndex);
+                return <td key={`cell-${cellIndex}`} className={piece ? piece.toLowerCase() : ''}></td>;
             });
             return <tr key={`row-${rowIndex}`}>{cells}</tr>;
         });

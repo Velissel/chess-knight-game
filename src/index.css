@@ -32,4 +32,17 @@ code {
 
 .chessboard tr:nth-child(2n+1) td:nth-child(2n) { 
   background: #9f9f9f; 
-} 
+}
+
+.chessboard tr > td.knight {
+  background-image: url('https://cdn4.iconfinder.com/data/icons/landing-page/100/landing_page-16-512.png') !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+.chessboard tr > td.destination {
+  background-image: url('https://cdn.pixabay.com/photo/2013/07/13/11/25/target-158129_960_720.png') !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
