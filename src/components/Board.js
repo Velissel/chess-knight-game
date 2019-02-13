@@ -1,7 +1,19 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 
+import actions from '../actions';
+
 export default class Board extends Component {
+    moveKnight(x, y) {
+        const { board, dispatch } = this.props;
+        const successors = board.getSuccessors();
+        successors.forEach(successor => {
+            if (successor.pieces.has(`${x},${y}`)) {
+                dispatch(actions.board.setBoardState(successor));
+            }
+        });
+    }
+
     render() {
         const { board, destination } = this.props;
         return (
@@ -24,7 +36,7 @@ export default class Board extends Component {
                     className = piece.toLowerCase();
                 }
 
-                return <td key={`cell-${cellIndex}`} className={className}></td>;
+                return <td key={`cell-${cellIndex}`} className={className} onClick={() => this.moveKnight(cellIndex, rowIndex)}></td>;
             });
             return <tr key={`row-${rowIndex}`}>{cells}</tr>;
         });

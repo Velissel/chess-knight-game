@@ -55,6 +55,7 @@ class BoardGame extends Component {
     }
 
     render() {
+        const { dispatch } = this.props;
         const { board, destination } = this.props.board;
         return (
             <Container>
@@ -69,7 +70,7 @@ class BoardGame extends Component {
                         </InputGroup>
                     </Form>
                 </div>
-                { board && <div className="mb-3"><Board board={board} destination={destination}/></div>}
+                { board && <div className="mb-3"><Board board={board} destination={destination} dispatch={dispatch}/></div>}
                 { board && <ButtonToolbar><Button onClick={this.help}>Help</Button></ButtonToolbar>}
             </Container>
         );
