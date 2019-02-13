@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, InputGroup, FormControl, Container } from 'react-bootstrap';
+import { Form, ButtonToolbar, Button, InputGroup, FormControl, Container } from 'react-bootstrap';
 import _ from 'lodash';
 
 import actions from '../actions';
 import Board from '../components/Board';
+import BoardModel from '../models/Board';
+import BFS from '../algorithms/BFS';
 
 class BoardGame extends Component {
     constructor(props) {
         super(props);
         this.onGameSetupSubmit = this.onGameSetupSubmit.bind(this);
+        this.help = this.help.bind(this);
 
         this.state = {
             size: ''
@@ -24,6 +27,23 @@ class BoardGame extends Component {
         if (_.isFinite(Number(size))) {
             dispatch(actions.board.setBoardSize(Number(size)));
             dispatch(actions.board.putRandomPiecesOnBoard());
+        }
+    }
+
+    help(e) {
+        e.preventDefault();
+        const { board, destination } = this.props.board;
+        const goal = new BoardModel(board.size);
+        goal.setPiece('KNIGHT', destination.x, destination.y);
+
+        const result = BFS(board, goal, item => {
+            return item.getSuccessors();
+        }, (item1, item2) => {
+            return item1.isEqual(item2);
+        });
+        console.log(result);
+        if (!result) {
+            alert('Unable to find solution...');
         }
     }
 
@@ -42,7 +62,8 @@ class BoardGame extends Component {
                         </InputGroup>
                     </Form>
                 </div>
-                { board && <Board board={board} destination={destination}/>}
+                { board && <div className="mb-3"><Board board={board} destination={destination}/></div>}
+                { board && <ButtonToolbar><Button onClick={this.help}>Help</Button></ButtonToolbar>}
             </Container>
         );
     }

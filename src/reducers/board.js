@@ -27,6 +27,8 @@ export default (state = initState, action) => {
         const size = board.size;
         const destination = generateRandomPosition(size);
         const knight = generateRandomPosition(size, [destination]);
+        // const destination = {x: 11, y: 11};
+        // const knight = {x: 13, y: 10};
 
         board.setPiece('KNIGHT', knight.x, knight.y);
 
