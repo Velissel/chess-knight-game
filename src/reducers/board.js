@@ -5,6 +5,7 @@ import Board from '../models/Board';
 
 const initState = {
     board: null,
+    destination: null,
     size: null
 };
 const {
@@ -27,14 +28,14 @@ export default (state = initState, action) => {
         const destination = generateRandomPosition(size);
         const knight = generateRandomPosition(size, [destination]);
 
-        board.setPiece('DESTINATION', destination.x, destination.y);
         board.setPiece('KNIGHT', knight.x, knight.y);
 
         return Object.assign({}, state, {
-            board
+            board,
+            destination
         });
     }
-    
+
     return state;
 }
 

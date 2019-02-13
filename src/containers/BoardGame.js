@@ -28,7 +28,7 @@ class BoardGame extends Component {
     }
 
     render() {
-        const { board } = this.props.board;
+        const { board, destination } = this.props.board;
         return (
             <Container>
                 <h1>Simple Chess Game</h1>
@@ -42,7 +42,7 @@ class BoardGame extends Component {
                         </InputGroup>
                     </Form>
                 </div>
-                { board && <Board board={board}/>}
+                { board && <Board board={board} destination={destination}/>}
             </Container>
         );
     }
