@@ -29,10 +29,21 @@ export default class Board {
         return this.pieces.get(`${x},${y}`);
     }
 
+    /**
+     * remove a piece from board
+     * @param  {number} x 
+     * @param  {number} y 
+     * @return {boolean}   if a piece is remove, true is returned, otherwise false is returned
+     */
     removePiece(x, y) {
         return this.pieces.delete(`${x},${y}`);
     }
 
+    /**
+     * returns all possible successors of this board
+     * currently only moves of KNIGHT is supported
+     * @return {array} array of Board
+     */
     getSuccessors() {
         const successors = [];
 
@@ -85,10 +96,19 @@ export default class Board {
         return successors;
     }
 
+    /**
+     * get clone of self
+     * @return {Board} 
+     */
     clone() {
         return new Board(this.size, new Map(this.pieces));
     }
 
+    /**
+     * equality check, returns true if 2 boards are completely same
+     * @param  {Board}  board 
+     * @return {Boolean}       
+     */
     isEqual(board) {
         if (board.size !== this.size) {
             return false;

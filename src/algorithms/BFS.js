@@ -1,5 +1,14 @@
 import _ from 'lodash';
 
+/**
+ * BFS algorithm, check https://en.wikipedia.org/wiki/Breadth-first_search
+ * if a path can not be found, null is returned
+ * @param  {any} start         
+ * @param  {any} goal          
+ * @param  {array} getSuccessors 
+ * @param  {boolean} comparator    
+ * @return {array}               an array of path leads to goal
+ */
 export default (start, goal, getSuccessors, comparator) => {
     const queue = [];
     const visited = [];

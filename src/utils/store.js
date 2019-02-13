@@ -7,6 +7,7 @@ import reducers from '../reducers';
 const middlewares = [thunk];
 middlewares.push(logger);
 
-const store = createStore(reducers, {}, applyMiddleware(...middlewares));
 
-export default store;
+export default (initState = {}) => {
+    return createStore(reducers, initState, applyMiddleware(...middlewares));
+};
